@@ -7,7 +7,6 @@ const jwt = require('jsonwebtoken');
 const Reviewer = require('../models/reviewerModel');
 
 router.route('/').post(async(req, res) => {
-
   const FirstName = req.body.FirstName;
   const MiddleInitial = req.body.MiddleInitial;
   const LastName = req.body.LastName;

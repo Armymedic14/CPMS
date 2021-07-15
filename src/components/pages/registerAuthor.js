@@ -3,7 +3,6 @@ import axios from 'axios';
 import '../../App.css';
 
 class RegisterAuthor extends React.Component {
-    
     constructor(props) {
         super(props);
     
@@ -22,6 +21,7 @@ class RegisterAuthor extends React.Component {
         this.onChangecPassword = this.onChangecPassword.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     
+        //set initial state
         this.state = {
             FirstName: '',
             MiddleInitial: '',
@@ -39,6 +39,7 @@ class RegisterAuthor extends React.Component {
         }
     }
     
+    //onChange methods
     onChangeFirstName(e) {this.setState({FirstName: e.target.value})}
     onChangeMiddleInitial(e) {this.setState({MiddleInitial: e.target.value})}
     onChangeLastName(e) {this.setState({LastName: e.target.value})}
@@ -53,6 +54,7 @@ class RegisterAuthor extends React.Component {
     onChangePassword(e) {this.setState({Password: e.target.value})}
     onChangecPassword(e) {this.setState({cPassword: e.target.value})}
         
+    //submit author object to database
     async onSubmit(e) {
         e.preventDefault();
 
@@ -76,12 +78,13 @@ class RegisterAuthor extends React.Component {
 
         await axios.post('http://localhost:5000/author', author, {withCredentials: true});
 
-        //window.location = '/';
+        //route user to home after registration
+        window.location = '/';
     }
 
     render() {
         return ( 
-            <div className="register1">
+            <div className="registerA">
                 <div className="content">
                     <form onSubmit={this.onSubmit}>
                         <div className="form-group">

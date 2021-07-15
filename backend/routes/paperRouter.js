@@ -50,6 +50,7 @@ router.route('/').post(auth, async(req, res) => {
   const Other = req.body.Other;
   const OtherDescription = req.body.OtherDescription;
 
+  //paper object
   const newPaper = new Paper({
     AuthorID,
     Active,
@@ -66,21 +67,16 @@ router.route('/').post(auth, async(req, res) => {
     NonMajorCourses, ObjectOrientedIssues, OperatingSystems, ParallelProcessing, Pedagogy, 
     ProgrammingLanguages,Research, Security, SoftwareEngineering, SystemsAnalysisAndDesign,
     UsingTechnologyInTheClassroom, WebAndInternetProgramming, Other, OtherDescription
-
   });
 
   const savedPaper = await newPaper.save()
   res.json(savedPaper);
 });
 
+//route paper through auth for authorization. Will work only for appropriate users.
 router.route('/').get(auth, async(req, res) => {
-  try{
     const papers = await Paper.find();
     res.json(papers);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send();
-  }
 });
 
 module.exports = router; 

@@ -7,7 +7,6 @@ const jwt = require('jsonwebtoken');
 const Author = require('../models/authorModel');
 
 router.route('/').post(async(req, res) => {
-
   const FirstName = req.body.FirstName;
   const MiddleInitial = req.body.MiddleInitial;
   const LastName = req.body.LastName;
@@ -22,28 +21,30 @@ router.route('/').post(async(req, res) => {
   const Password = req.body.Password;
   const cPassword = req.body.cPassword;
 
+  //validation
   if (!EmailAddress || !Password || !cPassword)
   return res
     .status(400)
     .json({ errorMessage: 'Please enter all required fields.' });
 
-if (Password.length > 5)
-  return res.status(400).json({
-    errorMessage: 'The max password length is 5 characters.',
-  });
+  if (Password.length > 5)
+    return res.status(400).json({
+      errorMessage: 'The max password length is 5 characters.',
+    });
 
-if (Password !== cPassword)
-  return res.status(400).json({
-    errorMessage: 'Please enter the same password twice.',
-  });
+  if (Password !== cPassword)
+    return res.status(400).json({
+      errorMessage: 'Passwords do not match.',
+    });
 
-const existingAuthor = await Author.findOne({ EmailAddress });
+  const existingAuthor = await Author.findOne({ EmailAddress });
 
-if (existingAuthor)
-  return res.status(400).json({
-    errorMessage: 'An account with this email already exists.',
-  });
+  if (existingAuthor)
+    return res.status(400).json({
+      errorMessage: 'This email is already associated with an account.',
+    });
 
+  //author object
   const newAuthor = new Author({
     FirstName,
     MiddleInitial,
@@ -61,14 +62,17 @@ if (existingAuthor)
 
   const savedAuthor = await newAuthor.save(); 
 
+  //sign the jwt token with secret code
   const token = jwt.sign(
     {
       author: savedAuthor._id,
     },
     process.env.jwtSecret
   );
+  //display token in terminal
   console.log(token);
 
+  //store cookie in browser
   res
       .cookie('token', token, {
         httpOnly: true,
@@ -78,41 +82,36 @@ if (existingAuthor)
 });
 
 router.route('/login').post(async(req, res) => {
-  try{
   const EmailAddress = req.body.EmailAddress;
   const Password = req.body.Password;
 
-    if (!EmailAddress || !Password)
-    return res
-      .status(400)
-      .json({ errorMessage: 'Please enter all required fields.' });
+  //validation
+  if (!EmailAddress || !Password)
+  return res
+    .status(400)
+    .json({ errorMessage: 'Please enter all required fields.' });
 
-    const existingAuthor = Author.findOne({EmailAddress});
-    if (!existingAuthor)
-      return res.status(401).json({ errorMessage: 'Wrong email or password.' });
+  const existingAuthor = Author.findOne({EmailAddress});
+  if (!existingAuthor)
+    return res.status(401).json({ errorMessage: 'Wrong email or password.' });
 
-    if (!Password.localeCompare(existingAuthor.Password))
-      return res.status(401).json({ errorMessage: 'Wrong email or password.' });
+  if (!Password.localeCompare(existingAuthor.Password))
+    return res.status(401).json({ errorMessage: 'Wrong email or password.' });
 
-    //sign the jwt token with secret code
-    const token = jwt.sign(
-      {
-        author: existingAuthor._id,
-      },
-      process.env.jwtSecret
-    );
+  //sign the jwt token with secret code
+  const token = jwt.sign(
+    {
+      author: existingAuthor._id,
+    },
+    process.env.jwtSecret
+  );
 
-    //send the token in a HTTP-only cookie
-    res
-      .cookie('token', token, {
-        httpOnly: true,
-      })
-      .send();
-    }
-      catch (err) {
-        console.error(err);
-        res.status(500).send();
-      }
+  //send the token in a HTTP-only cookie
+  res
+    .cookie('token', token, {
+      httpOnly: true,
+    })
+    .send();
 });
 
 router.route('/logout').get((req, res) => {

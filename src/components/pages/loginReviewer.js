@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 
+//styling
 import '../../App.css';
 
 //variables needed for login
@@ -21,7 +22,7 @@ export default function LoginReviewer() {
 
     return ( 
         //form components: labels, textboxes, button
-        <div className='login1'> Login
+        <div className='loginR'> Login
             <form onSubmit={login}>
                 <div className="form-group">
                     <label htmlFor="Email">Email</label>

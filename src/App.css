@@ -6,12 +6,18 @@
 }
 
 .home,
+.login,
+.loginA,
+.loginR,
 .register,
-.submit,
+.registerA,
+.registerR,
+.reports,
 .review,
-.login {
-  display: flex;
+.submit {
   height: 90vh;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -21,35 +27,8 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
   color: #fff;
   font-size: 30px;
-}
-
-.register {
-  background-image: url("./images/register.jpg");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  color: #fff;
-  font-size: 100px;
-}
-
-.review {
-  background-image: url("./images/reviewImg.jpg");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  color: #fff;
-  font-size: 100px;
 }
 
 .login {
@@ -57,11 +36,53 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
   color: #fff;
   font-size: 100px;
+}
+
+.loginA {
+  background-image: url("./images/loginImg.jpg");
+  background-position: center;
+  background-repeat: repeat;
+  background-size: cover;
+  color: #fff;
+  font-size: 40px;
+}
+
+.loginR {
+  background-image: url("./images/loginImg.jpg");
+  background-position: center;
+  background-repeat: repeat;
+  background-size: cover;
+  color: #fff;
+  font-size: 40px;
+}
+
+.register {
+  background-image: url("./images/register.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: rgb(0, 0, 0);
+  font-size: 100px;
+}
+
+.registerA {
+  background-image: url("./images/register.jpg");
+  background-position: center;
+  background-repeat: no-epeat;
+  background-size: cover;
+  color: rgb(0, 0, 0);
+  font-size: 40px;
+}
+
+.registerR {
+  background-image: url("./images/register.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: rgb(0, 0, 0);
+  font-size: 30px;
 }
 
 .reports {
@@ -69,55 +90,22 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
   color: #fff;
   font-size: 100px;
 }
 
-.login1 {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-image: url("./images/loginImg.jpg");
+.review {
+  background-image: url("./images/reviewImg.jpg");
   background-position: center;
   background-repeat: repeat;
   background-size: cover;
+  height: 100vh;
 }
 
-.base {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.submit {
   background-image: url("./images/submitImg.jpg");
   background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.register1 {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-image: url("./images/register.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.baseReview {
-  width: 100%;
-  height: 100%;
-  background-image: url("./images/reviewImg.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-size: cover;
 }
 
@@ -129,13 +117,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.content2 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: lightblue;
 }
 .content3 {
   display: flex;
@@ -151,10 +132,19 @@
 }
 
 .form-group {
+  font-size: 14px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   width: fit-content;
+}
+.form-checkbox-group {
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  background-color: rgb(121, 195, 219);
 }
 
 .label {

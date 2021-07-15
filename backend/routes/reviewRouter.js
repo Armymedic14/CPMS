@@ -29,6 +29,7 @@ router.route('/').post(auth, async(req, res) => {
   const ComfortLevelAcceptability = req.body.ComfortLevelAcceptability;
   const Complete = req.body.Complete;
 
+  //review object
   const newReview = new Review({
     PaperID,
     ReviewerID,
@@ -58,14 +59,10 @@ router.route('/').post(auth, async(req, res) => {
   res.json(savedReview);
 });
 
+//route paper through auth for authorization. Will work only for appropriate users.
 router.route('/').get(auth, async(req, res) => {
-  try{
     const reviews = await Review.find();
     res.json(reviews);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send();
-  }
 });
 
 module.exports = router; 

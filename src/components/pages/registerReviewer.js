@@ -3,7 +3,6 @@ import axios from 'axios';
 import '../../App.css';
 
 class RegisterReviewer extends React.Component {
-    
   constructor(props) {
     super(props);
     
@@ -26,6 +25,7 @@ class RegisterReviewer extends React.Component {
 
       this.onSubmit = this.onSubmit.bind(this);
   
+      //set initial state
       this.state = {
         FirstName: '',
         MiddleInitial: '',
@@ -56,6 +56,7 @@ class RegisterReviewer extends React.Component {
       }
     }
 
+    //onChange methods
     onChangeFirstName(e) {this.setState({FirstName: e.target.value})}
     onChangeMiddleInitial(e) {this.setState({MiddleInitial: e.target.value})}
     onChangeLastName(e) {this.setState({LastName: e.target.value})}
@@ -73,6 +74,7 @@ class RegisterReviewer extends React.Component {
     onChangeOtherDescription(e) {this.setState({OtherDescription: e.target.value})}
     onChangeReviewsAcknowledged(e) {this.setState({ReviewsAcknowledged: e.target.value})}
 
+    //onChange method for checkboxes
     onCheckboxChange = (e) => {
       const target = e.target;
       const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -83,6 +85,7 @@ class RegisterReviewer extends React.Component {
       });
     }
         
+    //submit reviewer object to database
     async onSubmit(e) {
         e.preventDefault();
 
@@ -143,12 +146,13 @@ class RegisterReviewer extends React.Component {
 
         axios.post('http://localhost:5000/reviewer', reviewer, {withCredentials: true});
 
+        //route to home after registration
         window.location = '/';
     }
     
     render() {
         return ( 
-            <div className="register1">Register as a reviewer
+            <div className="registerR">Register as a reviewer
                 <form onSubmit={this.onSubmit}>
                   <div className="content">
                     <div className="form-group">
@@ -268,7 +272,7 @@ class RegisterReviewer extends React.Component {
                             />
                     </div>
                   </div>
-                  <div className="content2">
+                  <div className="form-checkbox-group">
                     <div>
                       <input type="checkbox" name="AnalysisOfAlgorithms"  
                         onChange={this.onCheckboxChange}
