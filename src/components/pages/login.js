@@ -4,6 +4,7 @@ import '../../App.css';
 
 export default function Login() {
     return (
+      //routes to author and reviewer logins
         <div className='login'>Login
           <div>
             <Link to='loginAuthor'>

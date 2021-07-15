@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import '../../App.css';
 
+//variables needed for login
 export default function LoginAuthor() {
     const [EmailAddress, setEmailAddress] = useState('');
     const [Password, setPassword] = useState('');
@@ -14,10 +15,12 @@ export default function LoginAuthor() {
             EmailAddress,
             Password
         };
+        //post request to MongoDB for author login
         await axios.post('http://localhost:5000/author/login', loginData);
     }
 
     return ( 
+        //form components: labels, textboxes, button
         <div className='login1'> Login
             <form onSubmit={login}>
                 <div className="form-group">
